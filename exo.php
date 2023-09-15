@@ -11,8 +11,8 @@
 //1)Rayon
 //et les méthode "calculerSurface" et "calculerPerimetre"
 abstract class FormeGeometrique{
-    public $Surface;
-    public $perimetre;
+    protected $Surface;
+    protected $perimetre;
 
     public function __construct($Surface, $perimetre){
         $this->Surface = $Surface;
@@ -32,8 +32,8 @@ class Rectangle extends FormeGeometrique{
     }
     public function CalculerPerimetre()
     {
-
-        2*($this->Surface + $this->perimetre);
+        $this->perimetre = 2 * $this->longueur + $this->largeur;
+        return $this->perimetre;
     }
 
     public function CalculerSurface(){
@@ -41,5 +41,14 @@ class Rectangle extends FormeGeometrique{
     }
 }
 class Cercle extends FormeGeometrique{
-    public $Rayon;
+    private $Rayon;
+    public function __construct($Surface, $perimetre, $Rayon){
+        parent::__construct($Surface, $perimetre);
+        $this->Rayon = $Rayon;
+    }
+        public function calculerSurface()
+    {
+        $this->perimetre = 2 * M_PI * pow($this->Rayon, 2);
+        return $this->Surface;
+    }
 }
